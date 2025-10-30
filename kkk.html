@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dheva's UTS Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #0b0c10 0%, #000 100%);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #00eaff;
+      text-shadow: 0 0 10px #00eaff;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 20px;
+      text-align: center;
+      z-index: 100;
+      border-bottom: 2px solid rgba(0, 234, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    nav a {
+      color: #00eaff;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      margin: 0 15px;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      padding: 8px 16px;
+      border-radius: 5px;
+    }
+
+    nav a:hover {
+      color: #fff;
+      background: rgba(0, 234, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 100px 15%;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+      min-height: 100vh;
+    }
+
+    img {
+      display: block;
+      margin: 40px auto;
+      border-radius: 15px;
+      max-width: 80%;
+      box-shadow: 0 0 20px rgba(0,234,255,0.5);
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 30px 0;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 12px;
+      text-align: left;
+      font-size: 1rem;
+    }
+
+    th {
+      background: rgba(0,234,255,0.2);
+      color: #00eaff;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* Press Start screen */
+    #start-screen {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 999;
+      transition: opacity 1s ease;
+    }
+
+    #start-screen h1 {
+      font-size: 3rem;
+      color: #00eaff;
+      text-shadow: 0 0 20px #00eaff;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    #press-start {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      color: #00eaff;
+      cursor: pointer;
+      animation: blink 1s infinite;
+      padding: 15px 30px;
+      border: 2px solid #00eaff;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      user-select: none;
+      background: transparent;
+      outline: none;
+    }
+
+    #press-start:hover {
+      background: rgba(0, 234, 255, 0.1);
+      transform: scale(1.05);
+      text-shadow: 0 0 10px #00eaff;
+    }
+
+    .quote {
+      font-style: italic;
+      color: #00eaff;
+      margin: 20px 0;
+      padding: 20px;
+      border-left: 4px solid #00eaff;
+      background: rgba(0,234,255,0.05);
+      border-radius: 5px;
+    }
+
+    .lyrics-box {
+      background: rgba(0, 234, 255, 0.05);
+      border: 2px solid rgba(0, 234, 255, 0.3);
+      border-radius: 10px;
+      padding: 30px;
+      margin: 30px 0;
+      line-height: 2;
+    }
+
+    .meaning-box {
+      background: rgba(0, 234, 255, 0.08);
+      border-left: 4px solid #00eaff;
+      padding: 25px;
+      margin: 30px 0;
+      border-radius: 5px;
+    }
+
+    .emoji {
+      font-size: 1.5rem;
+      margin: 0 5px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    iframe {
+      display: block;
+      margin: 40px auto;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,234,255,0.4);
+      width: 80%;
+      height: 450px;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 80px 10%;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      nav a {
+        display: inline-block;
+        margin: 5px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRESS START SCREEN -->
+  <div id="start-screen">
+    <h1>Welcome to Dheva's<br>UTS Portal</h1>
+    <button id="press-start">▶ PRESS START</button>
+  </div>
+
+  <nav id="main-nav" style="display:none;">
+    <a href="#uts1">UTS-1</a>
+    <a href="#uts2">UTS-2</a>
+    <a href="#uts3">UTS-3</a>
+    <a href="#uts4">UTS-4</a>
+    <a href="#uts5">UTS-5</a>
+  </nav>
+
+  <header id="header" style="display:none;">
+    <h1>🌟 UTS PORTAL - Raditya Nanda Dhevara 🌟</h1>
+  </header>
+
+  <!-- UTS 1: ALL ABOUT ME -->
+  <section id="uts1" style="display:none;">
+    <h2>✨ UTS 1: All About Me ✨</h2>
+    
+    <p>Hi! Namaku <strong>Raditya Nanda Dhevara</strong>, but you can call me Dheva, Depz, or Depa, whichever feels right to you 😄</p>
+
+    <!-- Depato image inserted by assistant -->
+    <div style="text-align:center; margin: 20px 0;">
+      <img src="../depato.jpeg" alt="Depato" style="max-width:40%; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.6);" />
+    </div>
+    
+    <p>Right now, I'm still on a journey of finding my true self. Kadang aku masih merasa belum maksimal dalam banyak hal — terutama dalam hal niat dan konsistensi untuk menjadi lebih baik. Aku juga masih sering merasa minder atau kurang percaya diri, but deep down, I keep trying to learn, grow, and change little by little.</p>
+    
+    <p>Aku percaya setiap orang punya waktunya masing-masing, and maybe this is my time to start again, selow tapi pasti.</p>
+    
+    <p>Semoga di tahun ini dan tahun-tahun berikutnya, semua dreams, hopes, and goals yang aku mau bisa benar-benar terwujud. 🌻</p>
+
+    <div class="quote">
+      <p>"You don't have to be perfect to be better — you just have to keep going."</p>
+    </div>
+
+    <div class="quote">
+      <p>"Grow at your own pace, even when it feels slow — progress is still progress."</p>
+    </div>
+
+    <div class="quote">
+      <p>"Someday, the version of me I'm chasing will finally smile back." 🌙</p>
+    </div>
+  </section>
+
+  <!-- UTS 2: MY SONGS FOR YOU -->
+  <section id="uts2" style="display:none;">
+    <h2>🎵 UTS 2: My Song for You 🎵</h2>
+    
+    <audio controls style="display: block; margin: 40px auto; width: 80%; border-radius: 15px; box-shadow: 0 0 20px rgba(0,234,255,0.4); background: rgba(0, 234, 255, 0.1); padding: 15px;">
+      <source src="../w2esound.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    
+    <div class="lyrics-box">
+      <h3 style="text-align: center; margin-top: 0;">Lyrics (English Translation)</h3>
+      <p style="text-align: center; line-height: 2;">
+        Between people<br>
+        Between the wind<br>
+        Each person has their own desires<br>
+        Painted together<br><br>
+        
+        When it becomes firm enough to stand on<br>
+        Then it becomes my world<br><br>
+        
+        My small heart<br>
+        And the good things in it<br>
+        Break and harden<br>
+        Melt and fall away<br>
+        And only then can I see my eternity<br><br>
+        
+        Love between people<br>
+        Everyone gathers together<br>
+        Hoping for eternity<br><br>
+        
+        If we bury our bodies and hearts<br>
+        Then our world becomes perfect<br><br>
+        
+        With love<br>
+        With love<br><br>
+        
+        My small heart<br>
+        Like small waves inside<br>
+        Break and push towards you<br>
+        Melting and falling away<br>
+        And only then can I see my eternity
+      </p>
+    </div>
+
+    <div class="meaning-box">
+      <h3 style="margin-top: 0;">💭 Meaning of the Song</h3>
+      <p>At its core, this song is about <strong>love as a universal force</strong>, not just romantic love, but the kind of love that connects all human beings, that heals, and that helps us grow.</p>
+      
+      <p>It tells the story of how people, like the wind, cross paths and influence each other. Through these encounters — sometimes painful, sometimes beautiful — we begin to understand what it truly means to love and to be loved.</p>
+      
+      <p>The imagery of hearts breaking, hardening, melting, and falling away represents the transformative journey of love. Only through experiencing these cycles of vulnerability and strength can we truly see our own eternity — our lasting impact on others and the world.</p>
+    </div>
+  </section>
+
+  <!-- UTS 3: MY STORIES FOR YOU -->
+  <section id="uts3" style="display:none;">
+    <h2>📖 UTS 3: My Stories for You 📖</h2>
+    
+    <h3>1. Titik Mula Suka Anime 🎬</h3>
+    
+    <p>Sejak awal pandemi Covid, aku cukup kaget dengan keadaan dunia saat itu. It felt like something straight out of a movie, everything changed so fast.</p>
+    
+    <p>Aku sering nonton film bertema zombie apocalypse, dan selalu berharap hal seperti itu nggak akan pernah terjadi di dunia nyata. Walau Covid jelas bukan zombie, tapi kenyataan bahwa virus itu bisa membunuh banyak orang bikin aku ".....".</p>
+    
+    <p>Karena rasa takut itu, aku mulai mencari hal lain yang bisa bikin aku lupa sejenak. And that's when I found something new, the world of Anime.</p>
+    
+  <img src="../alya.jpg" alt="Alya - Anime Discovery" style="max-width: 60%;">
+    
+    <p>Anime pertama yang aku tonton adalah Highschool DxD (not recommended tho 😅). Tapi dari situ aku langsung terpukau. Animasi, warna, ekspresi, semuanya terasa alive. Aku cuma bisa mikir, <em>"How can people create something this cool?"</em></p>
+    
+  <img src="../ayam.jpg" alt="Ayam - Anime Art" style="max-width: 60%;">
+    
+    <p>Setelah aku cari tahu, ternyata semua itu digambar frame by frame oleh animator. Aku shock banget. Sejak saat itu, aku jadi benar-benar respect para animator. Sampai sekarang pun, setiap kali nonton anime dengan visual yang keren, aku selalu ter-amaze dan mikir, <em>"They really did this by hand… amazing."</em> 🎨</p>
+    
+  <img src="../ruby.jpg" alt="Ruby - Anime Character" style="max-width: 60%;">
+    
+    <h3>2. Kesadaran Diri 🌱</h3>
+    
+    <p>Aku bersyukur banget punya orang tua yang begitu peduli. Mereka selalu menempatkan anak di atas segalanya, bahkan di atas diri mereka sendiri.</p>
+    
+    <p>Dari kecil, hidupku bisa dibilang "serba ada", tapi bukan berarti mudah. Ayahku dulu sering berpindah-pindah kerja, jadi kami sering ikut berpindah tempat juga. Aku pernah tinggal di pedalaman Kalimantan, lalu pindah ke Jakarta. That was a huge culture shock for me.</p>
+    
+    <p>Aku jadi anak yang agak sulit beradaptasi. Kadang aku merasa asing di tempat baru. Tapi satu hal yang selalu sama, orang tuaku selalu ada. Ibu sering bantu aku belajar, bahkan sampai nanya-nanya tiap mata pelajaran biar aku siap sekolah.</p>
+    
+  <img src="../ayano.jpg" alt="Ayano - Self Awareness" style="max-width: 60%;">
+    
+    <p>Waktu aku diterima di Institut Teknologi Bandung, itu jadi momen paling bahagia buat keluarga kami. Mereka sangat bangga dan menunjukkan cinta mereka dengan banyak cara, hadiah, dukungan, dan doa tanpa henti. Tapi di sisi lain, aku juga mulai sadar...</p>
+    
+    <p><strong>Hidup sendirian sebagai anak rantau itu nggak semudah yang aku kira.</strong></p>
+    
+    <p>Ternyata selama ini hidupku "terasa mudah" karena ada mereka di belakangku. Now that I'm on my own, I realize, life isn't easy, but that's what makes us grow.</p>
+    
+    <p>We need to struggle, learn, and fight to become the real version of ourselves.</p>
+    
+    <div class="quote">
+      <p>"Sometimes you need to be alone, not to feel lonely, but to realize who you truly are." 🌙</p>
+    </div>
+  </section>
+
+  <!-- UTS 4: MY SHAPE -->
+  <section id="uts4" style="display:none;">
+    <h2>🎯 UTS 4: My SHAPE 🎯</h2>
+    
+    <p style="font-size: 1.3rem; text-align: center; color: #00eaff; margin-bottom: 50px;">
+      Mengenal diriku melalui lima dimensi yang membentuk siapa aku sekarang.
+    </p>
+
+    <div style="background: rgba(0,234,255,0.05); padding: 30px; border-radius: 15px; margin: 40px 0; border-left: 5px solid #00eaff;">
+      <h3 style="margin-top: 0;">🌟 S - Signature Strengths</h3>
+      <p>Aku selalu punya <strong>semangat tinggi untuk belajar</strong>. I love learning something new and challenging myself to be better every day. Aku nggak mau menjadi orang yang tertinggal, aku percaya bahwa progress, no matter how small, still matters.</p>
+      
+      <p>Selain itu, aku <strong>easygoing parah</strong>, gampang bergaul dan sering dianggap membawa suasana positif. Ketika berbicara, aku sering membuat suasana menjadi meriah, bukan karena ingin menonjol, tapi karena aku selalu berusaha membuat orang lain merasa nyaman.</p>
+      
+      <p style="font-style: italic; color: #00eaff; margin-top: 20px;">For me, being number one is cool, but being remembered is better. 🌟</p>
+    </div>
+
+    <div style="background: rgba(0,234,255,0.05); padding: 30px; border-radius: 15px; margin: 40px 0; border-left: 5px solid #00eaff;">
+      <h3 style="margin-top: 0;">💖 H - Heart</h3>
+      <p>Motivasi terbesarku datang dari <strong>keinginan untuk berkembang dan memberi dampak baik bagi orang lain</strong>.</p>
+      
+      <p>Aku punya passion dalam belajar, beradaptasi, dan berbagi hal baru, karena aku percaya setiap pengetahuan yang aku dapat bisa membantu seseorang di luar sana.</p>
+      
+      <p>Nilai yang paling aku pegang adalah <strong>ketulusan, kerja keras, dan keberanian untuk mencoba</strong>.</p>
+      
+      <p style="font-style: italic; color: #00eaff; margin-top: 20px;">That's my "why" — to grow, to help, and to make people feel inspired by my journey.</p>
+    </div>
+
+    <div style="background: rgba(0,234,255,0.05); padding: 30px; border-radius: 15px; margin: 40px 0; border-left: 5px solid #00eaff;">
+      <h3 style="margin-top: 0;">🎓 A - Aptitudes & Acquired Skills</h3>
+      <p>Aku cepat menangkap hal baru dan punya rasa ingin tahu yang besar. Dalam hal keterampilan, aku mulai mengasah kemampuan di bidang <strong>teknologi, komunikasi, dan kreativitas</strong>.</p>
+      
+      <p>Aku juga punya kemampuan untuk <strong>beradaptasi dengan lingkungan baru</strong> dan memahami orang lain dengan empati.</p>
+      
+      <p style="font-style: italic; color: #00eaff; margin-top: 20px;">I may not know everything yet, but I'm always ready to learn and improve.</p>
+    </div>
+
+    <div style="background: rgba(0,234,255,0.05); padding: 30px; border-radius: 15px; margin: 40px 0; border-left: 5px solid #00eaff;">
+      <h3 style="margin-top: 0;">✨ P - Personality</h3>
+      <p>Aku tipe orang yang <strong>optimistic, warm, and flexible</strong>.</p>
+      
+      <p>Aku mudah bergaul, tapi juga bisa serius kalau sudah fokus pada tujuan.</p>
+      
+      <p>Aku suka lingkungan yang terbuka, penuh ide, dan tidak kaku, karena di situ aku bisa berkembang maksimal.</p>
+      
+      <p style="font-style: italic; color: #00eaff; margin-top: 20px;">I'm the kind of person who brings good vibes, but also values deep and meaningful conversations.</p>
+    </div>
+
+    <div style="background: rgba(0,234,255,0.05); padding: 30px; border-radius: 15px; margin: 40px 0; border-left: 5px solid #00eaff;">
+      <h3 style="margin-top: 0;">🌱 E - Experiences</h3>
+      <p>Hidupku penuh dengan perpindahan dan pembelajaran baru, dari kampung biasa, kota besar, hingga akhirnya merantau untuk kuliah. Semua pengalaman itu membentukku jadi seseorang yang lebih <strong>tangguh, adaptable, dan sadar diri</strong>.</p>
+      
+      <p>Aku belajar bahwa hidup itu nggak selalu mudah, tapi setiap tantangan adalah kesempatan untuk tumbuh.</p>
+      
+      <p style="font-style: italic; color: #00eaff; margin-top: 20px;">Each experience, whether success or failure, has taught me something valuable — and that's what makes me.</p>
+    </div>
+
+    <div class="quote" style="text-align: center; font-size: 1.3rem; margin-top: 50px;">
+      <p>"I'm still on my way — learning, growing, and finding who I truly am. Not perfect, but always in progress." 🌙</p>
+    </div>
+
+    <table style="margin-top: 50px;">
+      <thead>
+        <tr>
+          <th>Aspect</th>
+          <th>Key Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Signature Strengths</strong></td>
+          <td>Semangat belajar tinggi, easygoing, membawa suasana positif</td>
+        </tr>
+        <tr>
+          <td><strong>Heart</strong></td>
+          <td>Berkembang & memberi dampak, ketulusan, kerja keras, berani mencoba</td>
+        </tr>
+        <tr>
+          <td><strong>Aptitudes & Skills</strong></td>
+          <td>Cepat belajar, teknologi, komunikasi, kreativitas, empati tinggi</td>
+        </tr>
+        <tr>
+          <td><strong>Personality</strong></td>
+          <td>Optimistic, warm, flexible, good vibes, meaningful conversations</td>
+        </tr>
+        <tr>
+          <td><strong>Experiences</strong></td>
+          <td>Perpindahan tempat, adaptasi, tangguh, belajar dari tantangan</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- UTS 5: MY PERSONAL REVIEWS -->
+  <section id="uts5" style="display:none;">
+    <h2>📊 UTS 5: My Personal Reviews 📊</h2>
+
+    <p><strong>Identifikasi Diri:</strong><br>
+    Nama: Raditya Nanda Dhevara<br>
+    NIM: (Isi)<br>
+    Kelas: (Isi)<br>
+    Semester: Ganjil 2025/2026</p>
+
+    <p><strong>Tinjauan Umum:</strong><br>
+    Refleksi umum atas hasil pembelajaran dan perkembangan diri selama UTS 1–4.</p>
+
+    <h3>UTS-1: All About Me</h3>
+    <table>
+      <tr><th>Kriteria</th><th>Deskripsi Penilaian</th><th>Skor</th></tr>
+      <tr><td>Orisinalitas</td><td>Narasi pribadi yang jujur dan otentik.</td><td>5</td></tr>
+      <tr><td>Keterlibatan</td><td>Cerita mengalir alami dan emosional.</td><td>5</td></tr>
+      <tr><td>Gaya Bertutur</td><td>Hangat dan mudah diikuti.</td><td>4</td></tr>
+      <tr><td>Insight</td><td>Menggambarkan kesadaran diri dengan baik.</td><td>5</td></tr>
+    </table>
+
+    <h3>UTS-2: My Songs for You</h3>
+    <table>
+      <tr><th>Kriteria</th><th>Deskripsi Penilaian</th><th>Skor</th></tr>
+      <tr><td>Orisinalitas</td><td>Pemilihan lagu yang merepresentasikan diri.</td><td>5</td></tr>
+      <tr><td>Keterlibatan</td><td>Tulisan emosional dan peka.</td><td>5</td></tr>
+      <tr><td>Emosi</td><td>Seimbang antara kejujuran dan ekspresi.</td><td>4</td></tr>
+      <tr><td>Inspirasi</td><td>Menyentuh dan memotivasi pembaca.</td><td>5</td></tr>
+    </table>
+
+    <h3>UTS-3: My Stories for You</h3>
+    <table>
+      <tr><th>Kriteria</th><th>Deskripsi Penilaian</th><th>Skor</th></tr>
+      <tr><td>Orisinalitas</td><td>Kisah reflektif dan penuh makna.</td><td>5</td></tr>
+      <tr><td>Keterlibatan</td><td>Runtut dan menarik perhatian.</td><td>5</td></tr>
+      <tr><td>Pengembangan Narasi</td><td>Struktur ide kuat dan konsisten.</td><td>5</td></tr>
+      <tr><td>Inspirasi</td><td>Mengajak pembaca untuk refleksi diri.</td><td>5</td></tr>
+    </table>
+
+    <h3>UTS-4: My SHAPE</h3>
+    <table>
+      <tr><th>Kriteria</th><th>Deskripsi Penilaian</th><th>Skor</th></tr>
+      <tr><td>Orisinalitas</td><td>Refleksi diri mendalam dan personal.</td><td>5</td></tr>
+      <tr><td>Keterlibatan</td><td>Jelas dan menarik.</td><td>4</td></tr>
+      <tr><td>Struktur</td><td>Tiap aspek SHAPE dijelaskan logis.</td><td>5</td></tr>
+      <tr><td>Inspirasi</td><td>Memotivasi pembaca untuk mengenal diri.</td><td>5</td></tr>
+    </table>
+
+    <h3>Rekap Skor Keseluruhan</h3>
+    <table>
+      <tr><th>UTS</th><th>Total Skor</th><th>Persentase</th><th>Kategori</th></tr>
+      <tr><td>UTS-1</td><td>19/20</td><td>95%</td><td>Sangat Baik</td></tr>
+      <tr><td>UTS-2</td><td>19/20</td><td>95%</td><td>Sangat Baik</td></tr>
+      <tr><td>UTS-3</td><td>20/20</td><td>100%</td><td>Sangat Baik</td></tr>
+      <tr><td>UTS-4</td><td>19/20</td><td>95%</td><td>Sangat Baik</td></tr>
+    </table>
+
+    <p><strong>Kesimpulan:</strong><br>
+    Keempat tugas menunjukkan konsistensi refleksi dan perkembangan diri. Aku belajar bahwa komunikasi yang baik bukan sekadar berbicara, tapi juga memahami dan hadir sepenuh hati. Ke depan, aku ingin mengasah komunikasi asertif tanpa kehilangan empati.</p>
+  </section>
+
+  <footer id="footer" style="display:none;">
+    <p>© 2025 Raditya Nanda Dhevara | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const startScreen = document.getElementById('start-screen');
+      const pressStart = document.getElementById('press-start');
+      const mainNav = document.getElementById('main-nav');
+      const header = document.getElementById('header');
+      const footer = document.getElementById('footer');
+      const sections = document.querySelectorAll('section');
+
+      function startApp() {
+        startScreen.style.opacity = '0';
+        setTimeout(() => {
+          startScreen.style.display = 'none';
+          mainNav.style.display = 'block';
+          header.style.display = 'block';
+          footer.style.display = 'block';
+          sections.forEach(section => {
+            section.style.display = 'block';
+          });
+          window.scrollTo(0, 0);
+        }, 1000);
+      }
+
+      pressStart.addEventListener('click', startApp);
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' && startScreen.style.display !== 'none') {
+          startApp();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
